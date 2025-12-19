@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaCheck - Navbar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-aquacheck">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#beranda">
+      <div class="brand-icon">
+        <i class="fas fa-tint"></i>
+      </div>
+      <div class="brand-text">
+        <span class="brand-main">AirCek</span>
+        <span class="brand-sub"></span>
+      </div>
+    </a>
+
+    <!-- Toggle Mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+     <ul class="navbar-nav ms-auto me-lg-5 mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="#beranda">
+            <i class="fas fa-robot me-1"></i> Beranda
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#history">
+            <i class="fas fa-history me-1"></i> History
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#solusi">
+            <i class="fas fa-filter me-1"></i> Solusi Air
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tentang">
+            <i class="fas fa-info-circle me-1"></i> Tentang
+          </a>
+        </li>
+      </ul>
+
+     
+    </div>
+  </div>
+</nav>
+
+<section id="beranda" class="container-fluid pt-5  mt-5">
+  <div class="row align-items-start">
+
+    <!-- KIRI : CHATBOT -->
+    <div class="col-lg-6 mb-4">
+      <div class="chatbot-card">
+
+        <!-- Header -->
+        <div class="chatbot-header">
+          <div class="chatbot-title">
+            AIR.ai
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="chatbot-body" id="chatBody">
+          <div class="bubble bot">
+            Halo 👋<br>
+            Saya <b>AIR.ai</b><br>
+            Silakan tanyakan seputar kualitas air minum.
+          </div>
+
+          <div class="bubble bot">
+            Contoh pertanyaan:<br>
+            • Apakah pH 6 aman?<br>
+            • Air layak minum itu seperti apa?
+          </div>
+        </div>
+
+        <!-- Input -->
+        <div class="chatbot-input">
+          <input type="text" id="chatInput" placeholder="Ketik pertanyaan Anda...">
+          <button onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- KANAN : KETERANGAN AI -->
+    <div class="col-lg-5 offset-lg-1">
+      <div class="ai-info-card">
+        <h4>Kegunaan AIR.ai</h4>
+        <ul>
+          <li>Menilai apakah air layak dikonsumsi</li>
+          <li>Menjelaskan arti nilai pH & TDS</li>
+          <li>Menjawab pertanyaan IPA tentang air</li>
+          <li>Memberi solusi jika air tidak memenuhi standar</li>
+          <li>(Nanti) Analisis foto kertas pH</li>
+        </ul>
+
+        <div class="ai-note">
+          <strong>Standar Umum Air Minum:</strong><br>
+          pH ideal: <b>6,5 – 8,5</b><br>
+          TDS aman: <b>&lt; 300 ppm</b>
+        </div>
+        <hr class="my-4">
+
+<h5 class="mb-3">
+  <i class="fas fa-camera me-2"></i>Upload Foto Uji Air
+</h5>
+
+<div class="upload-box">
+  <input type="file" id="imageInput" accept="image/*" hidden>
+  
+  <div class="upload-area" onclick="document.getElementById('imageInput').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <p>Klik untuk upload foto kertas pH / air</p>
+    <small>Format JPG / PNG</small>
+  </div>
+
+  <div id="imagePreview" class="image-preview d-none">
+    <img id="previewImg" src="" alt="Preview">
+    <button class="btn btn-sm btn-danger mt-2" onclick="removeImage()">
+      <i class="fas fa-trash"></i> Hapus
+    </button>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="history" class="container pt-5 mt-5"></section>
+<section id="solusi" class="container pt-5 mt-5"></section>
+<section id="tentang" class="container pt-5 mt-5"></section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="script.js"></script>
+</script>
+
+</body>
+</html>

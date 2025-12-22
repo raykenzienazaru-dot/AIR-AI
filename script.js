@@ -52,36 +52,36 @@ function AIR_AI(input) {
   const tdsRegex = /tds\s*[:=]?\s*(\d+)/i;
   const tdsMatch = q.match(tdsRegex);
   if (tdsMatch) {
-    const tds = parseInt(tdsMatch[1]);
-    parameterTerdeteksi.push(`TDS: ${tds} ppm`);
-    analyzeTDS(ph, alasan, solusi, statusObj);
-  }
+  const tds = parseInt(tdsMatch[1]);
+  parameterTerdeteksi.push(`TDS: ${tds} ppm`);
+  analyzeTDS(tds, alasan, solusi, statusObj);
+}
   
   // Deteksi kekeruhan
   const turbidityMatch = q.match(/kekeruhan\s*[:=]?\s*(\d+(\.\d+)?)/i);
-  if (turbidityMatch) {
-    const turbidity = parseFloat(turbidityMatch[1]);
-    parameterTerdeteksi.push(`Kekeruhan: ${turbidity} NTU`);
-    analyzeTurbidity(ph, alasan, solusi, statusObj);
-  }
-  
+ if (turbidityMatch) {
+  const turbidity = parseFloat(turbidityMatch[1]);
+  parameterTerdeteksi.push(`Kekeruhan: ${turbidity} NTU`);
+  analyzeTurbidity(turbidity, alasan, solusi, statusObj);
+}
+
   // Deteksi kondisi fisik air
-  analyzePhysicalConditions(ph, alasan, solusi, statusObj);
+ analyzePhysicalConditions(q, alasan, solusi, statusObj);
   
   // Deteksi klorin
   const chlorineMatch = q.match(/klorin\s*[:=]?\s*(\d+(\.\d+)?)/i);
-  if (chlorineMatch) {
-    const chlorine = parseFloat(chlorineMatch[1]);
-    parameterTerdeteksi.push(`Klorin: ${chlorine} mg/L`);
-    analyzeChlorine(ph, alasan, solusi, statusObj);
-  }
+ if (chlorineMatch) {
+  const chlorine = parseFloat(chlorineMatch[1]);
+  parameterTerdeteksi.push(`Klorin: ${chlorine} mg/L`);
+  analyzeChlorine(chlorine, alasan, solusi, statusObj);
+}
   
   // Deteksi kesadahan (hardness)
   const hardnessMatch = q.match(/kesadahan\s*[:=]?\s*(\d+)/i);
   if (hardnessMatch) {
     const hardness = parseInt(hardnessMatch[1]);
     parameterTerdeteksi.push(`Kesadahan: ${hardness} mg/L`);
-    analyzeHardness(ph, alasan, solusi, statusObj);
+    analyzeHardness(hardness, alasan, solusi, statusObj);
   }
   
   // Deteksi logam berat (timbal, merkuri, dll)
@@ -246,7 +246,8 @@ function analyzeHeavyMetals(q, alasan, solusi, statusObj, parameterTerdeteksi) {
 // ================= FUNGSI RESPONS EDUKASI =================
 
 function getEducationalContent(q) {
-  if (q.includes("ph") || q.includes("ph")) {
+ if (q.includes("ph"))
+ {
     return ` **EDUKASI: Apa itu pH Air?**
     
 **Definisi**: pH adalah ukuran keasaman atau kebasaan air pada skala 0-14.
@@ -370,7 +371,8 @@ function generateDefaultResponse() {
 7. Kondisi fisik (jernih, keruh, bau, berwarna)`;
 }
 
-function generateFinalResponse(status, alasan, solusi, parameterTerdeteksi) {
+function generateFinalResponse(statusObj, alasan, solusi, parameterTerdeteksi) {
+  const status = statusObj.status; 
   let response = ` **ANALISIS KUALITAS AIR**
   
  **Parameter Terdeteksi**:

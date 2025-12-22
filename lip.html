@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirCek - Sistem Cerdas Analisis Kualitas Air</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        padding-top: 80px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        overflow-x: hidden;
+      }
+
+      /* Navbar Styles */
+      .navbar-aquacheck {
+        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        padding: 0.8rem 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(26, 115, 232, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .navbar-aquacheck.scrolled {
+        padding: 0.5rem 0;
+        box-shadow: 0 6px 30px rgba(26, 115, 232, 0.4);
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        color: white !important;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+      }
+
+      .navbar-brand:hover {
+        transform: scale(1.05);
+      }
+
+      .brand-icon {
+        background: white;
+        color: #1a73e8;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .brand-main {
+        font-size: 1.4rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        margin: 0 12px;
+        padding: 10px 20px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: left 0.3s ease;
+      }
+
+      .nav-link:hover::before {
+        left: 100%;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff !important;
+        transform: translateY(-2px);
+      }
+
+      section {
+        scroll-margin-top: 90px;
+        min-height: 100vh;
+        padding: 60px 0;
+      }
+
+      /* Chatbot Card */
+      .chatbot-card {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        animation: slideInLeft 0.8s ease;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .chatbot-header {
+        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        padding: 20px;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .chatbot-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: ripple 4s linear infinite;
+      }
+
+      @keyframes ripple {
+        0% {
+          transform: translate(-50%, -50%) scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 0;
+        }
+      }
+
+      .chatbot-title {
+        font-weight: 700;
+        font-size: 1.3rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .chatbot-body {
+        height: 400px;
+        padding: 20px;
+        background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .chatbot-body::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .chatbot-body::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      .chatbot-body::-webkit-scrollbar-thumb {
+        background: #1a73e8;
+        border-radius: 10px;
+      }
+
+      .bubble {
+        max-width: 80%;
+        padding: 14px 18px;
+        font-size: 14px;
+        line-height: 1.6;
+        border-radius: 18px;
+        animation: fadeIn 0.5s ease;
+        position: relative;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .bubble.bot {
+        background: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%);
+        color: #1a73e8;
+        border-bottom-left-radius: 6px;
+        box-shadow: 0 4px 12px rgba(26, 115, 232, 0.15);
+      }
+
+      .bubble.user {
+        background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+        color: white;
+        margin-left: auto;
+        border-bottom-right-radius: 6px;
+        box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+      }
+
+      .chatbot-input {
+        display: flex;
+        padding: 16px;
+        border-top: 2px solid #e9ecef;
+        background: #fff;
+        gap: 10px;
+      }
+
+      .chatbot-input input {
+        flex: 1;
+        border: 2px solid #e9ecef;
+        padding: 12px 16px;
+        outline: none;
+        font-size: 14px;
+        background: #f8f9fa;
+        border-radius: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .chatbot-input input:focus {
+        border-color: #1a73e8;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+      }
+
+      .chatbot-input button {
+        background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+        border: none;
+        color: white;
+        padding: 0 20px;
+        border-radius: 14px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .chatbot-input button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+      }
+
+      /* AI Info Card */
+      .ai-info-card {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        animation: slideInRight 0.8s ease;
+        height: 100%;
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .ai-info-card h4 {
+        color: #1a73e8;
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .ai-info-card h4::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #1a73e8, transparent);
+      }
+
+      .ai-info-card ul {
+        padding-left: 20px;
+      }
+
+      .ai-info-card li {
+        margin-bottom: 12px;
+        font-size: 14px;
+        transition: transform 0.3s ease;
+      }
+
+      .ai-info-card li:hover {
+        transform: translateX(5px);
+      }
+
+      .ai-note {
+        margin-top: 20px;
+        background: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%);
+        padding: 16px;
+        border-radius: 16px;
+        font-size: 14px;
+        border-left: 4px solid #1a73e8;
+      }
+
+      /* Upload Box */
+      .upload-box {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .upload-area {
+        border: 3px dashed #1a73e8;
+        border-radius: 18px;
+        padding: 30px;
+        cursor: pointer;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        transition: all 0.3s ease;
+      }
+
+      .upload-area:hover {
+        background: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%);
+        transform: scale(1.02);
+      }
+
+      .upload-area i {
+        font-size: 42px;
+        color: #1a73e8;
+        margin-bottom: 12px;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .image-preview img {
+        max-width: 100%;
+        border-radius: 16px;
+        margin-top: 15px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      /* History Section */
+      .history-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        animation: slideUp 0.6s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .history-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+      }
+
+      .history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      .history-date {
+        color: #6c757d;
+        font-size: 14px;
+      }
+
+      .status-badge {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .status-layak {
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        color: #155724;
+      }
+
+      .status-tidak-layak {
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+        color: #721c24;
+      }
+
+      /* Solusi Air Section */
+      .solution-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .solution-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .solution-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #1a73e8, #0d47a1);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+
+      .solution-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .solution-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .solution-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: #1a73e8;
+        font-size: 32px;
+      }
+
+      .solution-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1a73e8;
+        margin-bottom: 15px;
+      }
+
+      /* Tentang Section */
+      .about-section {
+        background: white;
+        border-radius: 24px;
+        padding: 50px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+      }
+
+      .feature-box {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 25px;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        border-left: 4px solid #1a73e8;
+        transition: all 0.3s ease;
+      }
+
+      .feature-box:hover {
+        transform: translateX(10px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        font-size: 28px;
+        color: #1a73e8;
+        margin-right: 15px;
+      }
+
+      /* Floating Animation */
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+
+      /* Section Headers */
+      .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1a73e8;
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #1a73e8, #0d47a1);
+        border-radius: 2px;
+      }
+
+      .section-subtitle {
+        color: #6c757d;
+        font-size: 1.1rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .chatbot-card {
+          margin: 0 15px;
+        }
+
+        .ai-info-card {
+          margin-top: 30px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .solution-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Loading Animation */
+      .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 10px;
+      }
+
+      .typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background: #1a73e8;
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+      }
+
+      .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typing {
+        0%,
+        60%,
+        100% {
+          transform: translateY(0);
+        }
+        30% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-aquacheck">
+      <div class="container">
+        <a class="navbar-brand" href="#beranda">
+          <div class="brand-icon">
+            <i class="fas fa-tint"></i>
+          </div>
+          <div class="brand-text">
+            <span class="brand-main">AirCek</span>
+          </div>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="#beranda">
+                <i class="fas fa-home me-1"></i> Beranda
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#history">
+                <i class="fas fa-history me-1"></i> Riwayat
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#solusi">
+                <i class="fas fa-filter me-1"></i> Solusi Air
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#tentang">
+                <i class="fas fa-info-circle me-1"></i> Tentang
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- SECTION BERANDA -->
+    <section id="beranda" class="container-fluid pt-5">
+      <div class="row align-items-start">
+        <div class="col-lg-6 mb-4">
+          <div class="chatbot-card">
+            <div class="chatbot-header">
+              <div class="chatbot-title">
+                <i class="fas fa-robot me-2"></i>AIR.ai - Asisten Cerdas Anda
+              </div>
+            </div>
+
+            <div class="chatbot-body" id="chatBody">
+              <div class="bubble bot">
+                Halo 👋<br />
+                Saya <b>AIR.ai</b>, asisten pintar untuk analisis kualitas air
+                minum.<br />
+                Silakan tanyakan seputar kualitas air Anda!
+              </div>
+
+              <div class="bubble bot">
+                💡 <b>Contoh pertanyaan:</b><br />
+                • Apakah pH 6 aman untuk diminum?<br />
+                • Air layak minum itu seperti apa?<br />
+                • TDS 350 ppm apakah baik?
+              </div>
+            </div>
+
+            <div class="chatbot-input">
+              <input
+                type="text"
+                id="chatInput"
+                placeholder="Ketik pertanyaan Anda di sini..."
+              />
+              <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="ai-info-card">
+            <h4><i class="fas fa-lightbulb me-2"></i>Kegunaan AIR.ai</h4>
+            <ul>
+              <li>✅ Menilai apakah air layak dikonsumsi</li>
+              <li>📊 Menjelaskan arti nilai pH & TDS</li>
+              <li>🔬 Menjawab pertanyaan IPA tentang air</li>
+              <li>💡 Memberi solusi jika air tidak memenuhi standar</li>
+              <li>📸 Analisis foto kertas pH secara otomatis</li>
+            </ul>
+
+            <div class="ai-note">
+              <strong
+                ><i class="fas fa-check-circle me-2"></i>Standar Umum Air
+                Minum:</strong
+              ><br />
+              <div class="mt-2">
+                <i class="fas fa-flask me-2"></i>pH ideal: <b>6,5 – 8,5</b
+                ><br />
+                <i class="fas fa-water me-2"></i>TDS aman: <b>&lt; 300 ppm</b>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <h5 class="mb-3">
+              <i class="fas fa-camera me-2"></i>Upload Foto Uji Air
+            </h5>
+
+            <div class="upload-box">
+              <input type="file" id="imageInput" accept="image/*" hidden />
+
+              <div
+                class="upload-area"
+                onclick="document.getElementById('imageInput').click()"
+              >
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p class="mb-1"><strong>Klik untuk upload foto</strong></p>
+                <small>Format: JPG, PNG (Max 5MB)</small>
+              </div>
+
+              <div id="imagePreview" class="image-preview d-none">
+                <img id="previewImg" src="" alt="Preview" />
+                <button
+                  class="btn btn-danger btn-sm mt-3"
+                  onclick="removeImage()"
+                >
+                  <i class="fas fa-trash me-1"></i> Hapus Gambar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION HISTORY -->
+    <section id="history" class="container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-history me-2"></i>Riwayat Analisis
+        </h2>
+        <p class="section-subtitle">Lihat hasil analisis air Anda sebelumnya</p>
+      </div>
+
+      <div id="historyContainer">
+        <div class="text-center text-muted">
+          <i class="fas fa-inbox fa-3x mb-3 floating"></i>
+          <p>
+            Belum ada riwayat analisis. Mulai chat dengan AIR.ai untuk menyimpan
+            riwayat!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION SOLUSI AIR -->
+    <section id="solusi" class="container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-filter me-2"></i>Solusi Pengolahan Air
+        </h2>
+        <p class="section-subtitle">
+          Berbagai metode untuk meningkatkan kualitas air minum
+        </p>
+      </div>
+
+      <div class="solution-grid">
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <h4 class="solution-title">Reverse Osmosis (RO)</h4>
+          <p>
+            <strong>Fungsi:</strong> Menyaring hingga 99% kontaminan termasuk
+            TDS, logam berat, dan bakteri.
+          </p>
+          <p>
+            <strong>Cocok untuk:</strong> Air dengan TDS sangat tinggi (>500
+            ppm)
+          </p>
+          <p><strong>Keunggulan:</strong></p>
+          <ul>
+            <li>Efektif menghilangkan hampir semua kontaminan</li>
+            <li>Menghasilkan air sangat murni</li>
+            <li>Menghilangkan rasa dan bau</li>
+          </ul>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-atom"></i>
+          </div>
+          <h4 class="solution-title">Filter Karbon Aktif</h4>
+          <p>
+            <strong>Fungsi:</strong> Menyerap klorin, bau, rasa tidak enak, dan
+            zat organik.
+          </p>
+          <p>
+            <strong>Cocok untuk:</strong> Air PDAM dengan bau klorin atau rasa
+            tidak enak
+          </p>
+          <p><strong>Keunggulan:</strong></p>
+          <ul>
+            <li>Menghilangkan bau dan rasa klorin</li>
+            <li>Harga terjangkau</li>
+            <li>Mudah perawatan</li>
+          </ul>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-layer-group"></i>
+          </div>
+          <h4 class="solution-title">Filter Sedimentasi</h4>
+          <p>
+            <strong>Fungsi:</strong> Menyaring partikel kasar, lumpur, pasir,
+            dan kekeruhan.
+          </p>
+          <p>
+            <strong>Cocok untuk:</strong> Air keruh dengan partikel tersuspensi
+          </p>
+          <p><strong>Keunggulan:</strong></p>
+          <ul>
+            <li>Menjerihkan air secara fisik</li>
+            <li>Melindungi filter lain dari cepat kotor</li>
+            <li>Biaya operasional rendah</li>
+          </ul>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-flask"></i>
+          </div>
+          <h4 class="solution-title">Penetral pH</h4>
+          <p>
+            <strong>Fungsi:</strong> Menyeimbangkan pH air yang terlalu asam
+            atau basa.
+          </p>
+          <p>
+            <strong>Cocok untuk:</strong> Air dengan pH di luar rentang 6.5-8.5
+          </p>
+          <p><strong>Keunggulan:</strong></p>
+          <ul>
+            <li>Menormalkan pH secara otomatis</li>
+            <li>Mencegah korosi pipa</li>
+            <li>Meningkatkan rasa air</li>
+          </ul>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-viruses"></i>
+          </div>
+          <h4 class="solution-title">UV Sterilizer</h4>
+          <p>
+            <strong>Fungsi:</strong> Membunuh bakteri, virus, dan mikroorganisme
+            berbahaya.
+          </p>
+          <p>
+            <strong>Cocok untuk:</strong> Air sumur atau air yang berisiko
+            kontaminasi biologis
+          </p>
+          <p><strong>Keunggulan:</strong></p>
+          <ul>
+            <li>Disinfeksi tanpa bahan kimia</li>
+            <li>Tidak mengubah rasa air</li>
+            <li>Efektif 99.99% membunuh patogen</li>
+          </ul>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-compress-arrows-alt"></i>
+          </div>
+          <h4 class="solution-title">Water Softener</h4>
+          <p>
+            <strong>Fungsi:</strong> Mengurangi kesadahan air (kalsium &
+            magnesium)
+          </p>
+          <p><strong>Cocok untuk:</strong> Air sadah yang menyebabkan kerak</p>
+          <p><strong>Keunggulan:</strong></p>
+          <ul>
+            <li>Mencegah kerak pada peralatan</li>
+            <li>Membuat air lebih lembut untuk kulit</li>
+            <li>Hemat sabun dan detergen</li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="alert alert-info mt-5"
+        style="border-radius: 16px; border-left: 5px solid #1a73e8"
+      >
+        <h5><i class="fas fa-info-circle me-2"></i>Tips Memilih Solusi</h5>
+        <p class="mb-0">
+          Pilih solusi berdasarkan hasil analisis air Anda. Untuk masalah
+          kompleks, kombinasikan beberapa metode untuk hasil optimal.
+          Konsultasikan dengan ahli untuk sistem custom.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION TENTANG -->
+    <section id="tentang" class="container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-info-circle me-2"></i>Tentang AirCek
+        </h2>
+        <p class="section-subtitle">
+          Platform cerdas untuk analisis kualitas air berbasis AI
+        </p>
+      </div>
+
+      <div class="about-section">
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <h3 class="text-primary mb-4">
+              <i class="fas fa-bullseye me-2"></i>Misi Kami
+            </h3>
+            <p style="font-size: 1.1rem; line-height: 1.8">
+              AirCek hadir untuk memudahkan masyarakat dalam memahami dan
+              menganalisis kualitas air minum mereka. Dengan teknologi AI yang
+              canggih, kami memberikan informasi akurat dan solusi praktis untuk
+              memastikan air yang Anda konsumsi aman dan sehat.
+            </p>
+
+            <div class="mt-4">
+              <div class="feature-box">
+                <i class="fas fa-robot feature-icon"></i>
+                <strong>AI-Powered Analysis</strong>
+                <p class="mb-0 mt-2">
+                  Analisis instan menggunakan kecerdasan buatan untuk hasil yang
+                  akurat dan cepat
+                </p>
+              </div>
+
+              <div class="feature-box">
+                <i class="fas fa-chart-line feature-icon"></i>
+                <strong>Data-Driven Insights</strong>
+                <p class="mb-0 mt-2">
+                  Keputusan berdasarkan standar WHO dan Permenkes RI untuk
+                  keamanan terjamin
+                </p>
+              </div>
+
+              <div class="feature-box">
+                <i class="fas fa-mobile-alt feature-icon"></i>
+                <strong>Easy to Use</strong>
+                <p class="mb-0 mt-2">
+                  Interface intuitif yang mudah digunakan oleh siapa saja, kapan
+                  saja
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <h3 class="text-primary mb-4">
+              <i class="fas fa-cogs me-2"></i>Fitur Unggulan
+            </h3>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div
+                  class="card border-0 shadow-sm h-100"
+                  style="border-radius: 16px"
+                >
+                  <div class="card-body text-center p-4">
+                    <i class="fas fa-comments fa-3x text-primary mb-3"></i>
+                    <h5>Chatbot Interaktif</h5>
+                    <p class="text-muted small">
+                      Tanya jawab real-time dengan AI
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div
+                  class="card border-0 shadow-sm h-100"
+                  style="border-radius: 16px"
+                >
+                  <div class="card-body text-center p-4">
+                    <i class="fas fa-camera fa-3x text-primary mb-3"></i>
+                    <h5>Analisis Foto pH</h5>
+                    <p class="text-muted small">
+                      Upload foto untuk deteksi otomatis
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div
+                  class="card border-0 shadow-sm h-100"
+                  style="border-radius: 16px"
+                >
+                  <div class="card-body text-center p-4">
+                    <i class="fas fa-history fa-3x text-primary mb-3"></i>
+                    <h5>Riwayat Lengkap</h5>
+                    <p class="text-muted small">Lacak semua analisis Anda</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div
+                  class="card border-0 shadow-sm h-100"
+                  style="border-radius: 16px"
+                >
+                  <div class="card-body text-center p-4">
+                    <i class="fas fa-lightbulb fa-3x text-primary mb-3"></i>
+                    <h5>Solusi Praktis</h5>
+                    <p class="text-muted small">
+                      Rekomendasi berdasarkan masalah
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 p-4 bg-light" style="border-radius: 16px">
+              <h5 class="text-primary mb-3">
+                <i class="fas fa-shield-alt me-2"></i>Standar Referensi
+              </h5>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-2">
+                  <i class="fas fa-check text-success me-2"></i>WHO Guidelines
+                  for Drinking Water Quality
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check text-success me-2"></i>Permenkes RI No.
+                  492/2010
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check text-success me-2"></i>SNI 01-3553-2015
+                </li>
+                <li class="mb-0">
+                  <i class="fas fa-check text-success me-2"></i>EPA Safe
+                  Drinking Water Standards
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+      <div class="container">
+        <p class="mb-2">
+          <i class="fas fa-tint me-2"></i><strong>AirCek</strong> - Sistem
+          Cerdas Analisis Kualitas Air
+        </p>
+        <p class="small mb-0">
+          © 2024 AirCek. Didukung oleh teknologi AI untuk air yang lebih sehat.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Navbar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar-aquacheck");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Active nav link
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", function () {
+          document
+            .querySelectorAll(".nav-link")
+            .forEach((l) => l.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      // History storage
+      let historyData = JSON.parse(
+        localStorage.getItem("aircek_history") || "[]"
+      );
+
+      // Chat helper functions
+      function addBubble(text, sender) {
+        const chatBody = document.getElementById("chatBody");
+        const bubble = document.createElement("div");
+        bubble.className = `bubble ${sender}`;
+        bubble.innerHTML = text.replace(/\n/g, "<br>");
+        chatBody.appendChild(bubble);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      function addTypingIndicator() {
+        const chatBody = document.getElementById("chatBody");
+        const indicator = document.createElement("div");
+        indicator.className = "bubble bot typing-indicator";
+        indicator.id = "typing";
+        indicator.innerHTML = "<span></span><span></span><span></span>";
+        chatBody.appendChild(indicator);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      function removeTypingIndicator() {
+        const indicator = document.getElementById("typing");
+        if (indicator) indicator.remove();
+      }
+
+      // AI Engine
+      function AIR_AI(input) {
+        const q = input.toLowerCase().trim();
+
+        if (
+          q.includes("apa itu") ||
+          q.includes("apa yang dimaksud") ||
+          q.includes("definisi")
+        ) {
+          return getEducationalContent(q);
+        }
+
+        let statusObj = { status: "Layak" };
+        let alasan = [];
+        let solusi = [];
+        let parameterTerdeteksi = [];
+
+        // Deteksi pH
+        const phRegex = /ph\s*[:=]?\s*(\d+(\.\d+)?)/i;
+        const phMatch = q.match(phRegex);
+        if (phMatch) {
+          const ph = parseFloat(phMatch[1]);
+          parameterTerdeteksi.push(`pH: ${ph}`);
+          analyzePH(ph, alasan, solusi, statusObj);
+        }
+
+        // Deteksi TDS
+        const tdsRegex = /tds\s*[:=]?\s*(\d+)/i;
+        const tdsMatch = q.match(tdsRegex);
+        if (tdsMatch) {
+          const tds = parseInt(tdsMatch[1]);
+          parameterTerdeteksi.push(`TDS: ${tds} ppm`);
+          analyzeTDS(tds, alasan, solusi, statusObj);
+        }
+
+        // Deteksi kekeruhan
+        const turbidityMatch = q.match(/kekeruhan\s*[:=]?\s*(\d+(\.\d+)?)/i);
+        if (turbidityMatch) {
+          const turbidity = parseFloat(turbidityMatch[1]);
+          parameterTerdeteksi.push(`Kekeruhan: ${turbidity} NTU`);
+          analyzeTurbidity(turbidity, alasan, solusi, statusObj);
+        }
+
+        analyzePhysicalConditions(q, alasan, solusi, statusObj);
+
+        if (parameterTerdeteksi.length === 0 && alasan.length === 0) {
+          return generateDefaultResponse();
+        }
+
+        const response = generateFinalResponse(
+          statusObj,
+          alasan,
+          solusi,
+          parameterTerdeteksi
+        );
+
+        // Save to history
+        saveToHistory(input, response, statusObj.status);
+
+        return response;
+      }
+
+      function analyzePH(ph, alasan, solusi, statusObj) {
+        if (ph < 6.5) {
+          statusObj.status = "Tidak Layak";
+          alasan.push(`⚠️ pH ${ph} terlalu asam (di bawah 6,5)`);
+          solusi.push("🔧 Netralkan dengan filter alkali atau tambahkan kapur");
+        } else if (ph > 8.5) {
+          statusObj.status = "Tidak Layak";
+          alasan.push(`⚠️ pH ${ph} terlalu basa (di atas 8,5)`);
+          solusi.push("🔧 Gunakan filter dengan media penetral pH");
+        } else if (ph >= 7.0 && ph <= 7.5) {
+          alasan.push(`✅ pH ${ph} optimal untuk konsumsi manusia`);
+        } else {
+          alasan.push(`✔️ pH ${ph} dalam batas aman (6,5-8,5)`);
+        }
+      }
+
+      function analyzeTDS(tds, alasan, solusi, statusObj) {
+        if (tds > 1000) {
+          statusObj.status = "Tidak Layak";
+          alasan.push(`⚠️ TDS ${tds} ppm sangat tinggi (berbahaya)`);
+          solusi.push("🔧 Gunakan sistem reverse osmosis (RO)");
+        } else if (tds > 500) {
+          statusObj.status = "Tidak Layak";
+          alasan.push(`⚠️ TDS ${tds} ppm melebihi batas maksimal 500 ppm`);
+          solusi.push("🔧 Gunakan filter reverse osmosis");
+        } else if (tds > 300) {
+          alasan.push(`✔️ TDS ${tds} ppm masih dalam batas layak`);
+        } else if (tds > 50) {
+          alasan.push(`✅ TDS ${tds} ppm sangat baik untuk konsumsi`);
+        } else {
+          alasan.push(`⚠️ TDS ${tds} ppm sangat rendah, kurang mineral`);
+        }
+      }
+
+      function analyzeTurbidity(turbidity, alasan, solusi, statusObj) {
+        if (turbidity > 5) {
+          statusObj.status = "Tidak Layak";
+          alasan.push(`⚠️ Kekeruhan ${turbidity} NTU terlalu tinggi (>5 NTU)`);
+          solusi.push("🔧 Gunakan filter sedimentasi");
+        } else if (turbidity > 1) {
+          alasan.push(`✔️ Kekeruhan ${turbidity} NTU dalam batas aman`);
+        } else {
+          alasan.push(`✅ Kekeruhan ${turbidity} NTU sangat baik`);
+        }
+      }
+
+      function analyzePhysicalConditions(q, alasan, solusi, statusObj) {
+        if (q.includes("keruh") || q.includes("kabur")) {
+          statusObj.status = "Tidak Layak";
+          alasan.push("⚠️ Air keruh menunjukkan partikel tersuspensi");
+          solusi.push("🔧 Gunakan filter sedimentasi");
+        }
+
+        if (q.includes("bau") || q.includes("anyir")) {
+          statusObj.status = "Tidak Layak";
+          alasan.push("⚠️ Air berbau menunjukkan kontaminasi");
+          solusi.push("🔧 Gunakan filter karbon aktif");
+        }
+
+        if (
+          q.includes("berwarna") ||
+          q.includes("kuning") ||
+          q.includes("coklat")
+        ) {
+          statusObj.status = "Tidak Layak";
+          alasan.push("⚠️ Air berwarna menunjukkan kontaminasi");
+          solusi.push("🔧 Gunakan sistem filtrasi multi-tahap");
+        }
+      }
+
+      function getEducationalContent(q) {
+        if (q.includes("ph")) {
+          return `<b>📚 EDUKASI: Apa itu pH Air?</b><br><br>
+<b>Definisi:</b> pH adalah ukuran keasaman/kebasaan air (skala 0-14)<br>
+• pH < 7: Asam<br>
+• pH = 7: Netral<br>
+• pH > 7: Basa<br><br>
+<b>pH Ideal Air Minum:</b> 6.5 - 8.5<br>
+<b>Cara mengukur:</b> pH meter, kertas lakmus, pH strip`;
+        }
+
+        if (q.includes("tds")) {
+          return `<b>📚 EDUKASI: Apa itu TDS?</b><br><br>
+<b>Definisi:</b> Total Dissolved Solids - zat padat terlarut dalam air (ppm)<br><br>
+<b>Standar TDS:</b><br>
+• < 50 ppm: Sangat rendah<br>
+• 50-150 ppm: Ideal<br>
+• 150-300 ppm: Baik<br>
+• 300-500 ppm: Dapat diterima<br>
+• > 500 ppm: Tidak direkomendasikan`;
+        }
+
+        return `<b>📚 Parameter Kualitas Air:</b><br><br>
+1. <b>pH (6.5-8.5)</b>: Keasaman air<br>
+2. <b>TDS (<500 ppm)</b>: Total zat terlarut<br>
+3. <b>Kekeruhan (<5 NTU)</b>: Kejernihan air<br><br>
+Ketik "apa itu [parameter]" untuk detail`;
+      }
+
+      function generateDefaultResponse() {
+        return `<b>🤖 AIR.ai siap membantu!</b><br><br>
+<b>Contoh input:</b><br>
+• "pH 7.5, TDS 300"<br>
+• "Air saya keruh dan berbau"<br>
+• "TDS 450, pH 6.2"<br><br>
+<b>Atau tanyakan:</b><br>
+• "Apa itu pH?"<br>
+• "Definisi TDS"`;
+      }
+
+      function generateFinalResponse(
+        statusObj,
+        alasan,
+        solusi,
+        parameterTerdeteksi
+      ) {
+        let response = `<b>🔬 ANALISIS KUALITAS AIR</b><br><br>`;
+
+        if (parameterTerdeteksi.length > 0) {
+          response += `<b>📊 Parameter Terdeteksi:</b><br>`;
+          parameterTerdeteksi.forEach((p) => {
+            response += `• ${p}<br>`;
+          });
+          response += `<br>`;
+        }
+
+        const icon = statusObj.status === "Layak" ? "✅" : "❌";
+        response += `<b>Status:</b> ${icon} <b>${statusObj.status.toUpperCase()} KONSUMSI</b><br><br>`;
+
+        response += `<b>📋 Analisis:</b><br>`;
+        alasan.forEach((a) => {
+          response += `${a}<br>`;
+        });
+
+        if (solusi.length > 0) {
+          response += `<br><b>💡 Rekomendasi:</b><br>`;
+          solusi.forEach((s) => {
+            response += `${s}<br>`;
+          });
+        }
+
+        return response;
+      }
+
+      function saveToHistory(query, response, status) {
+        const entry = {
+          id: Date.now(),
+          date: new Date().toLocaleString("id-ID"),
+          query: query,
+          response: response,
+          status: status,
+        };
+
+        historyData.unshift(entry);
+        if (historyData.length > 20) historyData.pop();
+
+        localStorage.setItem("aircek_history", JSON.stringify(historyData));
+        updateHistoryDisplay();
+      }
+
+      function updateHistoryDisplay() {
+        const container = document.getElementById("historyContainer");
+
+        if (historyData.length === 0) {
+          container.innerHTML = `
+                    <div class="text-center text-muted">
+                        <i class="fas fa-inbox fa-3x mb-3 floating"></i>
+                        <p>Belum ada riwayat analisis.</p>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = historyData
+          .map(
+            (entry) => `
+                <div class="history-card">
+                    <div class="history-header">
+                        <div>
+                            <i class="fas fa-clock me-2 text-muted"></i>
+                            <span class="history-date">${entry.date}</span>
+                        </div>
+                        <span class="status-badge status-${
+                          entry.status === "Layak" ? "layak" : "tidak-layak"
+                        }">
+                            ${entry.status}
+                        </span>
+                    </div>
+                    <div class="mb-2">
+                        <strong><i class="fas fa-question-circle me-2 text-primary"></i>Pertanyaan:</strong>
+                        <p class="mb-0 mt-1">${entry.query}</p>
+                    </div>
+                    <div>
+                        <strong><i class="fas fa-robot me-2 text-primary"></i>Hasil:</strong>
+                        <div class="mt-1" style="font-size: 13px;">${
+                          entry.response
+                        }</div>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      // Send message function
+      function sendMessage() {
+        const input = document.getElementById("chatInput");
+        const message = input.value.trim();
+
+        if (!message) return;
+
+        addBubble(message, "user");
+        input.value = "";
+
+        addTypingIndicator();
+
+        setTimeout(() => {
+          removeTypingIndicator();
+          const response = AIR_AI(message);
+          addBubble(response, "bot");
+        }, 1000);
+      }
+
+      document
+        .getElementById("chatInput")
+        .addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            sendMessage();
+          }
+        });
+
+      // Image upload
+      const imageInput = document.getElementById("imageInput");
+      const imagePreview = document.getElementById("imagePreview");
+      const previewImg = document.getElementById("previewImg");
+
+      imageInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+          alert("Harap upload file gambar!");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          previewImg.src = e.target.result;
+          imagePreview.classList.remove("d-none");
+
+          previewImg.onload = () => {
+            const result = analyzePHFromImage(previewImg);
+
+            addTypingIndicator();
+            setTimeout(() => {
+              removeTypingIndicator();
+
+              let status = "LAYAK";
+              let solusi = "Air aman untuk diminum";
+
+              if (result.ph < 6.5 || result.ph > 8.5) {
+                status = "TIDAK LAYAK";
+                solusi =
+                  result.ph < 6.5
+                    ? "Air terlalu asam, gunakan filter penetral pH"
+                    : "Air terlalu basa, gunakan filter penurun pH";
+              }
+
+              const response = `<b>🧪 HASIL ANALISIS FOTO pH</b><br><br>
+• <b>Warna Terdeteksi:</b> ${result.label}<br>
+• <b>Perkiraan pH:</b> ${result.ph}<br>
+• <b>Status:</b> ${status}<br>
+• <b>Solusi:</b> ${solusi}`;
+
+              addBubble(response, "bot");
+              saveToHistory(
+                "Upload foto pH",
+                response,
+                status === "LAYAK" ? "Layak" : "Tidak Layak"
+              );
+            }, 1500);
+          };
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      function removeImage() {
+        imageInput.value = "";
+        imagePreview.classList.add("d-none");
+        previewImg.src = "";
+      }
+
+      // pH Color Analysis
+      const pHColorMap = [
+        { ph: 2, color: [255, 0, 0], label: "Merah (Sangat Asam)" },
+        { ph: 4, color: [255, 165, 0], label: "Oranye (Asam)" },
+        { ph: 6, color: [255, 255, 0], label: "Kuning (Agak Asam)" },
+        { ph: 7, color: [0, 255, 0], label: "Hijau (Netral)" },
+        { ph: 8, color: [0, 128, 255], label: "Biru Muda (Agak Basa)" },
+        { ph: 10, color: [0, 0, 255], label: "Biru (Basa)" },
+        { ph: 12, color: [128, 0, 128], label: "Ungu (Sangat Basa)" },
+      ];
+
+      function colorDistance(c1, c2) {
+        return Math.sqrt(
+          Math.pow(c1[0] - c2[0], 2) +
+            Math.pow(c1[1] - c2[1], 2) +
+            Math.pow(c1[2] - c2[2], 2)
+        );
+      }
+
+      function analyzePHFromImage(imgElement) {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = imgElement.width;
+        canvas.height = imgElement.height;
+        ctx.drawImage(imgElement, 0, 0);
+
+        const imageData = ctx.getImageData(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        ).data;
+
+        let r = 0,
+          g = 0,
+          b = 0,
+          count = 0;
+
+        for (let i = 0; i < imageData.length; i += 4) {
+          r += imageData[i];
+          g += imageData[i + 1];
+          b += imageData[i + 2];
+          count++;
+        }
+
+        r = Math.round(r / count);
+        g = Math.round(g / count);
+        b = Math.round(b / count);
+
+        let closest = pHColorMap[0];
+        let minDist = Infinity;
+
+        pHColorMap.forEach((item) => {
+          const dist = colorDistance([r, g, b], item.color);
+          if (dist < minDist) {
+            minDist = dist;
+            closest = item;
+          }
+        });
+
+        return closest;
+      }
+
+      // Initialize
+      updateHistoryDisplay();
+    </script>
+  </body>
+</html>

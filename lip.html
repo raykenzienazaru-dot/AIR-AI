@@ -638,6 +638,50 @@
           transform: translateY(-10px);
         }
       }
+      /* Navbar Toggler Animation */
+.custom-toggler {
+  border: 2px solid rgb(255, 246, 246);
+  border-radius: 12px;
+  padding: 8px 10px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.custom-toggler.active {
+  transform: rotate(180deg);
+  box-shadow: 0 0 15px rgba(240, 237, 237, 0.6);
+}
+
+/* Animasi icon hamburger */
+.custom-toggler .navbar-toggler-icon {
+  transition: transform 0.4s ease;
+}
+
+.custom-toggler.active .navbar-toggler-icon {
+  transform: rotate(180deg);
+}
+/* ICON NAVBAR TOGGLER */
+.icon-toggler {
+  border: none;
+  background: transparent;
+  padding: 6px;
+}
+
+.icon-toggler .navbar-toggler-icon {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.4s ease;
+}
+
+/* Saat navbar terbuka */
+.icon-toggler.active .navbar-toggler-icon {
+  transform: rotate(180deg);
+}
+/* FIX icon hamburger Bootstrap */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.95)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
     </style>
   </head>
   <body>
@@ -652,14 +696,10 @@
           </div>
         </a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler icon-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
 
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -1583,6 +1623,16 @@ Ketik "apa itu [parameter]" untuk detail`;
 
       // Initialize
       updateHistoryDisplay();
+  const toggler = document.querySelector(".icon-toggler");
+const navbarCollapse = document.getElementById("navbarContent");
+
+navbarCollapse.addEventListener("show.bs.collapse", () => {
+  toggler.classList.add("active");
+});
+
+navbarCollapse.addEventListener("hide.bs.collapse", () => {
+  toggler.classList.remove("active");
+});
     </script>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AirCek - Sistem Cerdas Analisis Kualitas Air</title>
+    <title>AirCek</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -695,7 +695,7 @@
           <div class="chatbot-card">
             <div class="chatbot-header">
               <div class="chatbot-title">
-                <i class="fas fa-robot me-2"></i>AIR.ai - Asisten Cerdas Anda
+                <i class="fas fa-robot me-2"></i>AIR.ai
               </div>
             </div>
 
@@ -708,7 +708,7 @@
               </div>
 
               <div class="bubble bot">
-                💡 <b>Contoh pertanyaan:</b><br />
+                <b>Contoh pertanyaan:</b><br />
                 • Apakah pH 6 aman untuk diminum?<br />
                 • Air layak minum itu seperti apa?<br />
                 • TDS 350 ppm apakah baik?
@@ -732,11 +732,11 @@
           <div class="ai-info-card">
             <h4><i class="fas fa-lightbulb me-2"></i>Kegunaan AIR.ai</h4>
             <ul>
-              <li>✅ Menilai apakah air layak dikonsumsi</li>
-              <li>📊 Menjelaskan arti nilai pH & TDS</li>
-              <li>🔬 Menjawab pertanyaan IPA tentang air</li>
-              <li>💡 Memberi solusi jika air tidak memenuhi standar</li>
-              <li>📸 Analisis foto kertas pH secara otomatis</li>
+              <li>Menilai apakah air layak dikonsumsi</li>
+              <li>Menjelaskan arti nilai pH & TDS</li>
+              <li>Menjawab pertanyaan tentang air saja</li>
+              <li>Memberi solusi jika air tidak memenuhi standar</li>
+              <li>Analisis foto kertas pH secara otomatis</li>
             </ul>
 
             <div class="ai-note">
@@ -1104,7 +1104,7 @@
           Cerdas Analisis Kualitas Air
         </p>
         <p class="small mb-0">
-          © 2024 AirCek. Didukung oleh teknologi AI untuk air yang lebih sehat.
+          © 2025 AirCek. Didukung oleh teknologi pengembangan AI untuk air yang lebih sehat.
         </p>
       </div>
     </footer>
@@ -1226,60 +1226,60 @@
       function analyzePH(ph, alasan, solusi, statusObj) {
         if (ph < 6.5) {
           statusObj.status = "Tidak Layak";
-          alasan.push(`⚠️ pH ${ph} terlalu asam (di bawah 6,5)`);
-          solusi.push("🔧 Netralkan dengan filter alkali atau tambahkan kapur");
+          alasan.push(` pH ${ph} terlalu asam (di bawah 6,5)`);
+          solusi.push(" Netralkan dengan filter alkali atau tambahkan kapur");
         } else if (ph > 8.5) {
           statusObj.status = "Tidak Layak";
-          alasan.push(`⚠️ pH ${ph} terlalu basa (di atas 8,5)`);
-          solusi.push("🔧 Gunakan filter dengan media penetral pH");
+          alasan.push(` pH ${ph} terlalu basa (di atas 8,5)`);
+          solusi.push(" Gunakan filter dengan media penetral pH");
         } else if (ph >= 7.0 && ph <= 7.5) {
-          alasan.push(`✅ pH ${ph} optimal untuk konsumsi manusia`);
+          alasan.push(` pH ${ph} optimal untuk konsumsi manusia`);
         } else {
-          alasan.push(`✔️ pH ${ph} dalam batas aman (6,5-8,5)`);
+          alasan.push(` pH ${ph} dalam batas aman (6,5-8,5)`);
         }
       }
 
       function analyzeTDS(tds, alasan, solusi, statusObj) {
         if (tds > 1000) {
           statusObj.status = "Tidak Layak";
-          alasan.push(`⚠️ TDS ${tds} ppm sangat tinggi (berbahaya)`);
-          solusi.push("🔧 Gunakan sistem reverse osmosis (RO)");
+          alasan.push(` TDS ${tds} ppm sangat tinggi (berbahaya)`);
+          solusi.push(" Gunakan sistem reverse osmosis (RO)");
         } else if (tds > 500) {
           statusObj.status = "Tidak Layak";
-          alasan.push(`⚠️ TDS ${tds} ppm melebihi batas maksimal 500 ppm`);
-          solusi.push("🔧 Gunakan filter reverse osmosis");
+          alasan.push(` TDS ${tds} ppm melebihi batas maksimal 500 ppm`);
+          solusi.push(" Gunakan filter reverse osmosis");
         } else if (tds > 300) {
-          alasan.push(`✔️ TDS ${tds} ppm masih dalam batas layak`);
+          alasan.push(` TDS ${tds} ppm masih dalam batas layak`);
         } else if (tds > 50) {
-          alasan.push(`✅ TDS ${tds} ppm sangat baik untuk konsumsi`);
+          alasan.push(` TDS ${tds} ppm sangat baik untuk konsumsi`);
         } else {
-          alasan.push(`⚠️ TDS ${tds} ppm sangat rendah, kurang mineral`);
+          alasan.push(` TDS ${tds} ppm sangat rendah, kurang mineral`);
         }
       }
 
       function analyzeTurbidity(turbidity, alasan, solusi, statusObj) {
         if (turbidity > 5) {
           statusObj.status = "Tidak Layak";
-          alasan.push(`⚠️ Kekeruhan ${turbidity} NTU terlalu tinggi (>5 NTU)`);
-          solusi.push("🔧 Gunakan filter sedimentasi");
+          alasan.push(` Kekeruhan ${turbidity} NTU terlalu tinggi (>5 NTU)`);
+          solusi.push(" Gunakan filter sedimentasi");
         } else if (turbidity > 1) {
-          alasan.push(`✔️ Kekeruhan ${turbidity} NTU dalam batas aman`);
+          alasan.push(` Kekeruhan ${turbidity} NTU dalam batas aman`);
         } else {
-          alasan.push(`✅ Kekeruhan ${turbidity} NTU sangat baik`);
+          alasan.push(` Kekeruhan ${turbidity} NTU sangat baik`);
         }
       }
 
       function analyzePhysicalConditions(q, alasan, solusi, statusObj) {
         if (q.includes("keruh") || q.includes("kabur")) {
           statusObj.status = "Tidak Layak";
-          alasan.push("⚠️ Air keruh menunjukkan partikel tersuspensi");
-          solusi.push("🔧 Gunakan filter sedimentasi");
+          alasan.push(" Air keruh menunjukkan partikel tersuspensi");
+          solusi.push(" Gunakan filter sedimentasi");
         }
 
         if (q.includes("bau") || q.includes("anyir")) {
           statusObj.status = "Tidak Layak";
-          alasan.push("⚠️ Air berbau menunjukkan kontaminasi");
-          solusi.push("🔧 Gunakan filter karbon aktif");
+          alasan.push(" Air berbau menunjukkan kontaminasi");
+          solusi.push(" Gunakan filter karbon aktif");
         }
 
         if (
@@ -1288,14 +1288,14 @@
           q.includes("coklat")
         ) {
           statusObj.status = "Tidak Layak";
-          alasan.push("⚠️ Air berwarna menunjukkan kontaminasi");
-          solusi.push("🔧 Gunakan sistem filtrasi multi-tahap");
+          alasan.push(" Air berwarna menunjukkan kontaminasi");
+          solusi.push(" Gunakan sistem filtrasi multi-tahap");
         }
       }
 
       function getEducationalContent(q) {
         if (q.includes("ph")) {
-          return `<b>📚 EDUKASI: Apa itu pH Air?</b><br><br>
+          return `<b> EDUKASI: Apa itu pH Air?</b><br><br>
 <b>Definisi:</b> pH adalah ukuran keasaman/kebasaan air (skala 0-14)<br>
 • pH < 7: Asam<br>
 • pH = 7: Netral<br>
@@ -1305,7 +1305,7 @@
         }
 
         if (q.includes("tds")) {
-          return `<b>📚 EDUKASI: Apa itu TDS?</b><br><br>
+          return `<b> EDUKASI: Apa itu TDS?</b><br><br>
 <b>Definisi:</b> Total Dissolved Solids - zat padat terlarut dalam air (ppm)<br><br>
 <b>Standar TDS:</b><br>
 • < 50 ppm: Sangat rendah<br>
@@ -1315,7 +1315,7 @@
 • > 500 ppm: Tidak direkomendasikan`;
         }
 
-        return `<b>📚 Parameter Kualitas Air:</b><br><br>
+        return `<b> Parameter Kualitas Air:</b><br><br>
 1. <b>pH (6.5-8.5)</b>: Keasaman air<br>
 2. <b>TDS (<500 ppm)</b>: Total zat terlarut<br>
 3. <b>Kekeruhan (<5 NTU)</b>: Kejernihan air<br><br>
@@ -1323,7 +1323,7 @@ Ketik "apa itu [parameter]" untuk detail`;
       }
 
       function generateDefaultResponse() {
-        return `<b>🤖 AIR.ai siap membantu!</b><br><br>
+        return `<b> AIR.ai siap membantu!</b><br><br>
 <b>Contoh input:</b><br>
 • "pH 7.5, TDS 300"<br>
 • "Air saya keruh dan berbau"<br>
@@ -1339,10 +1339,10 @@ Ketik "apa itu [parameter]" untuk detail`;
         solusi,
         parameterTerdeteksi
       ) {
-        let response = `<b>🔬 ANALISIS KUALITAS AIR</b><br><br>`;
+        let response = `<b> ANALISIS KUALITAS AIR</b><br><br>`;
 
         if (parameterTerdeteksi.length > 0) {
-          response += `<b>📊 Parameter Terdeteksi:</b><br>`;
+          response += `<b> Parameter Terdeteksi:</b><br>`;
           parameterTerdeteksi.forEach((p) => {
             response += `• ${p}<br>`;
           });
@@ -1352,13 +1352,13 @@ Ketik "apa itu [parameter]" untuk detail`;
         const icon = statusObj.status === "Layak" ? "✅" : "❌";
         response += `<b>Status:</b> ${icon} <b>${statusObj.status.toUpperCase()} KONSUMSI</b><br><br>`;
 
-        response += `<b>📋 Analisis:</b><br>`;
+        response += `<b> Menganalisis:</b><br>`;
         alasan.forEach((a) => {
           response += `${a}<br>`;
         });
 
         if (solusi.length > 0) {
-          response += `<br><b>💡 Rekomendasi:</b><br>`;
+          response += `<br><b> Rekomendasi:</b><br>`;
           solusi.forEach((s) => {
             response += `${s}<br>`;
           });
@@ -1492,7 +1492,7 @@ Ketik "apa itu [parameter]" untuk detail`;
                     : "Air terlalu basa, gunakan filter penurun pH";
               }
 
-              const response = `<b>🧪 HASIL ANALISIS FOTO pH</b><br><br>
+              const response = `<b> HASIL ANALISIS FOTO pH</b><br><br>
 • <b>Warna Terdeteksi:</b> ${result.label}<br>
 • <b>Perkiraan pH:</b> ${result.ph}<br>
 • <b>Status:</b> ${status}<br>

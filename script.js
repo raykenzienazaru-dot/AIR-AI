@@ -518,7 +518,7 @@ Air dengan TDS 200-400 ppm dari mineral alami lebih sehat daripada air dengan TD
   }
   
   if (q.includes("kekeruhan")) {
-return `📚 EDUKASI: Apa itu Kekeruhan Air?
+return `EDUKASI: Apa itu Kekeruhan Air?
 
 Definisi: Kekeruhan mengukur kejernihan air dan disebabkan oleh partikel tersuspensi.
 
@@ -543,7 +543,7 @@ Bahaya air keruh:
 
   }
   if (q.includes("klorin")) {
- return `📚 EDUKASI: Klorin dalam Air
+ return ` EDUKASI: Klorin dalam Air
 
 Fungsi:
 Disinfektan untuk membunuh bakteri dan virus.

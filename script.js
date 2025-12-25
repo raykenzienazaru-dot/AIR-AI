@@ -478,18 +478,24 @@ function analyzeHeavyMetals(q, alasan, solusi, statusObj, parameterTerdeteksi) {
 
 function getEducationalContent(q) {
   if (q.includes("ph")) {
-  return `EDUKASI: Apa itu pH Air?<br><br>
-Definisi: pH adalah ukuran keasaman atau kebasaan air pada skala 0-14.<br>
-• pH < 7: Asam (semakin kecil semakin asam)<br>
-• pH = 7: Netral<br>
-• pH > 7: Basa/Alkali (semakin besar semakin basa)<br><br>
-pH Air Minum Ideal: 6.5 - 8.5<br>
-• Terlalu asam (<6.5): Dapat mengikis pipa, mengandung logam berat terlarut<br>
-• Terlalu basa (>8.5): Rasa pahit, dapat menyebabkan pengendapan mineral<br><br>
-Pengaruh pH terhadap kesehatan:<br>
-- pH optimal membantu menjaga keseimbangan asam-basa tubuh<br>
-- Air dengan pH ekstrem dapat mengganggu pencernaan<br><br>
-Cara mengukur: Gunakan pH meter, kertas lakmus, atau pH strip`;
+ return `EDUKASI: Apa itu pH Air?
+
+Definisi: pH adalah ukuran keasaman atau kebasaan air pada skala 0–14.
+• pH < 7: Asam (semakin kecil semakin asam)
+• pH = 7: Netral
+• pH > 7: Basa/Alkali (semakin besar semakin basa)
+
+pH Air Minum Ideal: 6.5 – 8.5
+• Terlalu asam (<6.5): Dapat mengikis pipa dan mengandung logam berat terlarut
+• Terlalu basa (>8.5): Rasa pahit dan dapat menyebabkan pengendapan mineral
+
+Pengaruh pH terhadap kesehatan:
+- pH optimal membantu menjaga keseimbangan asam–basa tubuh
+- Air dengan pH ekstrem dapat mengganggu pencernaan
+
+Cara mengukur:
+Gunakan pH meter, kertas lakmus, atau pH strip`;
+
   }
   
   if (q.includes("tds")) {
@@ -512,47 +518,64 @@ Air dengan TDS 200-400 ppm dari mineral alami lebih sehat daripada air dengan TD
   }
   
   if (q.includes("kekeruhan")) {
-return `📚 EDUKASI: Apa itu Kekeruhan Air?<br><br>
-Definisi: Kekeruhan mengukur kejernihan air dan disebabkan oleh partikel tersuspensi.<br><br>
-Penyebab kekeruhan:<br>
-- Partikel tanah liat, lumpur, sedimen<br>
-- Mikroorganisme (alga, bakteri)<br>
-- Zat organik terdekomposisi<br>
-- Polutan industri<br><br>
-Satuan pengukuran: NTU (Nephelometric Turbidity Units)<br><br>
-Standar kekeruhan air minum:<br>
-• < 1 NTU: Sangat jernih<br>
-• 1–5 NTU: Dapat diterima<br>
-• > 5 NTU: Tidak layak minum (membutuhkan pengolahan)<br><br>
-Bahaya air keruh:<br>
-- Dapat menyembunyikan patogen berbahaya<br>
-- Mengurangi efektivitas disinfeksi<br>
+return `📚 EDUKASI: Apa itu Kekeruhan Air?
+
+Definisi: Kekeruhan mengukur kejernihan air dan disebabkan oleh partikel tersuspensi.
+
+Penyebab kekeruhan:
+- Partikel tanah liat, lumpur, sedimen
+- Mikroorganisme (alga, bakteri)
+- Zat organik terdekomposisi
+- Polutan industri
+
+Satuan pengukuran:
+NTU (Nephelometric Turbidity Units)
+
+Standar kekeruhan air minum:
+• < 1 NTU: Sangat jernih
+• 1–5 NTU: Dapat diterima
+• > 5 NTU: Tidak layak minum (membutuhkan pengolahan)
+
+Bahaya air keruh:
+- Dapat menyembunyikan patogen berbahaya
+- Mengurangi efektivitas disinfeksi
 - Menunjukkan kemungkinan kontaminasi`;
+
   }
   if (q.includes("klorin")) {
-  return `📚 EDUKASI: Klorin dalam Air<br><br>
-Fungsi: Disinfektan untuk membunuh bakteri dan virus.<br><br>
-Standar dalam air minum:<br>
-• Maksimal: 4 mg/L (WHO)<br>
-• Optimal residual: 0.2–0.5 mg/L (setelah pengolahan)<br><br>
-Bahaya kelebihan klorin:<br>
-- Iritasi kulit dan mata<br>
-- Rasa dan bau tidak enak<br>
-- Membentuk trihalometana (THM) yang berpotensi karsinogenik<br><br>
-Cara menghilangkan: Filter karbon aktif, aerasi, atau didiamkan selama 24 jam.`;
+ return `📚 EDUKASI: Klorin dalam Air
+
+Fungsi:
+Disinfektan untuk membunuh bakteri dan virus.
+
+Standar dalam air minum:
+• Maksimal: 4 mg/L (WHO)
+• Optimal residual: 0.2–0.5 mg/L (setelah pengolahan)
+
+Bahaya kelebihan klorin:
+- Iritasi kulit dan mata
+- Rasa dan bau tidak enak
+- Membentuk trihalometana (THM) yang berpotensi karsinogenik
+
+Cara menghilangkan:
+Filter karbon aktif, aerasi, atau didiamkan selama 24 jam.`;
 
   }
    if (q.includes("kualitas air")) {
- return `📚 EDUKASI: Parameter Kualitas Air<br><br>
-Parameter utama untuk menilai air layak minum:<br><br>
-1. pH (6.5–8.5): Keasaman air<br>
-2. TDS (< 500 ppm): Total zat terlarut<br>
-3. Kekeruhan (< 5 NTU): Kejernihan air<br>
-4. Klorin (< 4 mg/L): Disinfektan residual<br>
-5. Kesadahan (60–300 mg/L): Kandungan mineral kalsium dan magnesium<br>
-6. Kondisi fisik: Jernih, tidak berbau, tidak berwarna<br>
-7. Logam berat: Timbal, merkuri, arsen (harus sangat rendah)<br><br>
+return `📚 EDUKASI: Parameter Kualitas Air
+
+Parameter utama untuk menilai air layak minum:
+
+1. pH (6.5–8.5): Keasaman air
+2. TDS (< 500 ppm): Total zat terlarut
+3. Kekeruhan (< 5 NTU): Kejernihan air
+4. Klorin (< 4 mg/L): Disinfektan residual
+5. Kesadahan (60–300 mg/L): Kandungan mineral kalsium dan magnesium
+6. Kondisi fisik: Jernih, tidak berbau, tidak berwarna
+7. Logam berat: Timbal, merkuri, arsen (harus sangat rendah)
+
 Ketik "apa itu [parameter]" untuk penjelasan detail, contoh: "apa itu pH"`;
+
 
    }
 }
@@ -560,24 +583,28 @@ Ketik "apa itu [parameter]" untuk penjelasan detail, contoh: "apa itu pH"`;
 // ================= FUNGSI PEMBANTU =================
 
 function generateDefaultResponse() {
-  return `🤖 AIR-AI Enhanced siap membantu!<br><br>
-Contoh input multi-parameter:<br>
-• "pH 7.5, TDS 300, air jernih"<br>
-• "TDS=450, pH:6.2, air sedikit keruh"<br>
-• "Kekeruhan 3 NTU, kesadahan 250 mg/L"<br>
-• "pH 8, TDS 600, klorin 1.5"<br><br>
-Untuk edukasi, tanyakan:<br>
-• "Apa itu pH?"<br>
-• "Definisi TDS"<br>
-• "Apa yang dimaksud dengan kekeruhan air?"<br><br>
-Parameter yang didukung:<br>
-1. pH (6.5–8.5)<br>
-2. TDS (Total Dissolved Solids)<br>
-3. Kekeruhan (NTU)<br>
-4. Klorin (mg/L)<br>
-5. Kesadahan (mg/L)<br>
-6. Logam berat (timbal, merkuri, arsen, dll)<br>
+ return `AIR-AI Enhanced siap membantu!
+
+Contoh input multi-parameter:
+• "pH 7.5, TDS 300, air jernih"
+• "TDS=450, pH:6.2, air sedikit keruh"
+• "Kekeruhan 3 NTU, kesadahan 250 mg/L"
+• "pH 8, TDS 600, klorin 1.5"
+
+Untuk edukasi, tanyakan:
+• "Apa itu pH?"
+• "Definisi TDS"
+• "Apa yang dimaksud dengan kekeruhan air?"
+
+Parameter yang didukung:
+1. pH (6.5–8.5)
+2. TDS (Total Dissolved Solids)
+3. Kekeruhan (NTU)
+4. Klorin (mg/L)
+5. Kesadahan (mg/L)
+6. Logam berat (timbal, merkuri, arsen, dll)
 7. Kondisi fisik (jernih, keruh, bau, berwarna)`;
+
 
 }
 
@@ -601,35 +628,62 @@ function generateFinalResponse(statusObj, alasan, solusi, parameterTerdeteksi) {
   }
   
   const icon = status === "Layak" ? "✅" : "❌";
-  response += `<b>Status</b>: ${icon} <b>${status === "Layak" ? "LAYAK" : "TIDAK LAYAK"} KONSUMSI</b><br><br>`;
-  
-  response += `<b> Analisis</b>:<br>`;
-  alasan.forEach(a => response += `• ${escapeHTML(a)}<br>`);
-  
-  if (solusi.length > 0) {
-    response += `<br><b> Rekomendasi Perbaikan</b>:<br>`;
-    solusi.forEach(s => response += `${escapeHTML(s)}<br>`);
-  }
+
+response += `
+Status: ${icon} ${status === "Layak" ? "LAYAK KONSUMSI" : "TIDAK LAYAK KONSUMSI"}
+
+Analisis:
+`;
+
+alasan.forEach(a => {
+  response += `• ${escapeHTML(a)}\n`;
+});
+
+if (solusi.length > 0) {
+  response += `
+Rekomendasi Perbaikan:
+`;
+  solusi.forEach(s => {
+    response += `- ${escapeHTML(s)}\n`;
+  });
+}
+
   
   // Tambahkan skor kualitas air
-  response += `<br><b>🏆 Skor Kualitas Air</b>: ${waterScore}/100`;
-  
-  // Tambahkan confidence level
-  response += `<br><b>🎯 Tingkat Keyakinan Analisis</b>: ${confidenceLevel}`;
-  
+ response += `
+
+Skor Kualitas Air: ${waterScore}/100`;
+
+// Tambahkan confidence level
+response += `
+Tingkat Keyakinan Analisis: ${confidenceLevel}`;
+
   // Tambahkan tips berdasarkan status
-  if (status === "Tidak Layak") {
-    response += `<br><br><b> PERINGATAN</b>: Air ini tidak direkomendasikan untuk dikonsumsi langsung tanpa pengolahan terlebih dahulu.`;
-  } else {
-    response += `<br><br><b> Tips</b>: Meskipun layak, selalu pastikan air disimpan dalam wadah bersih dan terlindung dari kontaminasi.`;
-  }
-  
+ if (status === "Tidak Layak") {
+  response += `
+
+PERINGATAN:
+Air ini tidak direkomendasikan untuk dikonsumsi langsung tanpa pengolahan terlebih dahulu.`;
+} else {
+  response += `
+
+Tips:
+Meskipun layak, selalu pastikan air disimpan dalam wadah bersih dan terlindung dari kontaminasi.`;
+}
+
   // Tambahkan saran edukasi
-  response += `<br><br><b> Ingin belajar lebih?</b> Tanyakan "apa itu [parameter]" untuk penjelasan detail.`;
-  
-  // Disclaimer akademik (NILAI TAMBAH UNTUK LOMBA)
-  response += `<br><br><small><i> Catatan: Hasil analisis bersifat estimasi berbasis logika AI dan tidak menggantikan uji laboratorium. Konsultasikan dengan ahli untuk diagnosis yang lebih akurat.</i></small>`;
-  
+response += `
+
+Ingin belajar lebih?
+Tanyakan "apa itu [parameter]" untuk penjelasan detail.`;
+
+// Disclaimer akademik (NILAI TAMBAH UNTUK LOMBA)
+response += `
+
+Catatan:
+Hasil analisis bersifat estimasi berbasis logika AI dan tidak menggantikan uji laboratorium.
+Konsultasikan dengan ahli untuk diagnosis yang lebih akurat.`;
+
   return response;
 }
 

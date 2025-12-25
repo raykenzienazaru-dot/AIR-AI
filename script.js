@@ -478,104 +478,107 @@ function analyzeHeavyMetals(q, alasan, solusi, statusObj, parameterTerdeteksi) {
 
 function getEducationalContent(q) {
   if (q.includes("ph")) {
-    return `<b> EDUKASI: Apa itu pH Air?</b><br><br>
-<b>Definisi</b>: pH adalah ukuran keasaman atau kebasaan air pada skala 0-14.<br>
-• <b>pH < 7</b>: Asam (semakin kecil semakin asam)<br>
-• <b>pH = 7</b>: Netral<br>
-• <b>pH > 7</b>: Basa/Alkali (semakin besar semakin basa)<br><br>
-<b>pH Air Minum Ideal</b>: 6.5 - 8.5<br>
-• <b>Terlalu asam (<6.5)</b>: Dapat mengikis pipa, mengandung logam berat terlarut<br>
-• <b>Terlalu basa (>8.5)</b>: Rasa pahit, dapat menyebabkan pengendapan mineral<br><br>
-<b>Pengaruh pH terhadap kesehatan</b>:<br>
+  return `EDUKASI: Apa itu pH Air?<br><br>
+Definisi: pH adalah ukuran keasaman atau kebasaan air pada skala 0-14.<br>
+• pH < 7: Asam (semakin kecil semakin asam)<br>
+• pH = 7: Netral<br>
+• pH > 7: Basa/Alkali (semakin besar semakin basa)<br><br>
+pH Air Minum Ideal: 6.5 - 8.5<br>
+• Terlalu asam (<6.5): Dapat mengikis pipa, mengandung logam berat terlarut<br>
+• Terlalu basa (>8.5): Rasa pahit, dapat menyebabkan pengendapan mineral<br><br>
+Pengaruh pH terhadap kesehatan:<br>
 - pH optimal membantu menjaga keseimbangan asam-basa tubuh<br>
 - Air dengan pH ekstrem dapat mengganggu pencernaan<br><br>
-<b>Cara mengukur</b>: Gunakan pH meter, kertas lakmus, atau pH strip`;
+Cara mengukur: Gunakan pH meter, kertas lakmus, atau pH strip`;
   }
   
   if (q.includes("tds")) {
-    return `<b>EDUKASI: Apa itu TDS (Total Dissolved Solids)?</b><br><br>
-<b>Definisi</b>: TDS adalah total zat padat terlarut dalam air, diukur dalam ppm (parts per million).<br><br>
-<b>Komponen TDS</b>:<br>
-- Mineral alami (kalsium, magnesium, natrium)<br>
-- Garam anorganik<br>
-- Logam terlarut<br>
-- Zat organik tertentu<br><br>
-<b>Standar TDS Air Minum</b>:<br>
-• <b>< 50 ppm</b>: Sangat rendah, hampir murni<br>
-• <b>50-150 ppm</b>: Ideal untuk konsumsi<br>
-• <b>150-300 ppm</b>: Baik untuk kesehatan (mengandung mineral)<br>
-• <b>300-500 ppm</b>: Masih dapat diterima<br>
-• <b>> 500 ppm</b>: Tidak direkomendasikan untuk minum jangka panjang<br>
-• <b>> 1000 ppm</b>: Tidak layak minum<br><br>
-<b>TDS tinggi tidak selalu buruk</b>:<br>
+    return `EDUKASI: Apa itu TDS (Total Dissolved Solids)?
+Definisi : TDS adalah total zat padat terlarut dalam air, diukur dalam ppm (parts per million).
+Komponen TDS
+- Mineral alami (kalsium, magnesium, natrium)
+- Garam anorganik
+- Logam terlarut
+- Zat organik tertentu
+Standar TDS Air Minum
+•  50 ppm: Sangat rendah, hampir murni
+• 50-150 ppm : Ideal untuk konsumsi
+• 150-300 ppm: Baik untuk kesehatan (mengandung mineral)
+• 300-500 ppm : Masih dapat diterima
+•  500 ppm : Tidak direkomendasikan untuk minum jangka panjang
+• 1000 ppm : Tidak layak minum
+TDS tinggi tidak selalu buruk
 Air dengan TDS 200-400 ppm dari mineral alami lebih sehat daripada air dengan TDS rendah tetapi terkontaminasi.`;
   }
   
   if (q.includes("kekeruhan")) {
-    return `<b>📚 EDUKASI: Apa itu Kekeruhan Air?</b><br><br>
-<b>Definisi</b>: Kekeruhan mengukur kejernihan air, disebabkan oleh partikel tersuspensi.<br><br>
-<b>Penyebab kekeruhan</b>:<br>
+return `📚 EDUKASI: Apa itu Kekeruhan Air?<br><br>
+Definisi: Kekeruhan mengukur kejernihan air dan disebabkan oleh partikel tersuspensi.<br><br>
+Penyebab kekeruhan:<br>
 - Partikel tanah liat, lumpur, sedimen<br>
-- Mikroorganisme (algae, bakteri)<br>
+- Mikroorganisme (alga, bakteri)<br>
 - Zat organik terdekomposisi<br>
 - Polutan industri<br><br>
-<b>Satuan pengukuran</b>: NTU (Nephelometric Turbidity Units)<br><br>
-<b>Standar kekeruhan air minum</b>:<br>
-• <b>< 1 NTU</b>: Sangat jernih<br>
-• <b>1-5 NTU</b>: Dapat diterima<br>
-• <b>> 5 NTU</b>: Tidak layak minum (membutuhkan pengolahan)<br><br>
-<b>Bahaya air keruh</b>:<br>
+Satuan pengukuran: NTU (Nephelometric Turbidity Units)<br><br>
+Standar kekeruhan air minum:<br>
+• < 1 NTU: Sangat jernih<br>
+• 1–5 NTU: Dapat diterima<br>
+• > 5 NTU: Tidak layak minum (membutuhkan pengolahan)<br><br>
+Bahaya air keruh:<br>
 - Dapat menyembunyikan patogen berbahaya<br>
 - Mengurangi efektivitas disinfeksi<br>
 - Menunjukkan kemungkinan kontaminasi`;
   }
-  
   if (q.includes("klorin")) {
-    return `<b>📚 EDUKASI: Klorin dalam Air</b><br><br>
-<b>Fungsi</b>: Disinfektan untuk membunuh bakteri dan virus.<br><br>
-<b>Standar dalam air minum</b>:<br>
-• <b>Maksimal</b>: 4 mg/L (WHO)<br>
-• <b>Optimal residual</b>: 0.2-0.5 mg/L (setelah pengolahan)<br><br>
-<b>Bahaya kelebihan klorin</b>:<br>
+  return `📚 EDUKASI: Klorin dalam Air<br><br>
+Fungsi: Disinfektan untuk membunuh bakteri dan virus.<br><br>
+Standar dalam air minum:<br>
+• Maksimal: 4 mg/L (WHO)<br>
+• Optimal residual: 0.2–0.5 mg/L (setelah pengolahan)<br><br>
+Bahaya kelebihan klorin:<br>
 - Iritasi kulit dan mata<br>
 - Rasa dan bau tidak enak<br>
 - Membentuk trihalometana (THM) yang berpotensi karsinogenik<br><br>
-<b>Cara menghilangkan</b>: Filter karbon aktif, aerasi, atau didiamkan 24 jam.`;
+Cara menghilangkan: Filter karbon aktif, aerasi, atau didiamkan selama 24 jam.`;
+
   }
-  
-  return `<b>📚 EDUKASI: Parameter Kualitas Air</b><br><br>
+   if (q.includes("kualitas air")) {
+ return `📚 EDUKASI: Parameter Kualitas Air<br><br>
 Parameter utama untuk menilai air layak minum:<br><br>
-1. <b>pH (6.5-8.5)</b>: Keasaman air<br>
-2. <b>TDS (<500 ppm)</b>: Total zat terlarut<br>
-3. <b>Kekeruhan (<5 NTU)</b>: Kejernihan air<br>
-4. <b>Klorin (<4 mg/L)</b>: Disinfektan residual<br>
-5. <b>Kesadahan (60-300 mg/L)</b>: Kandungan mineral kalsium & magnesium<br>
-6. <b>Kondisi fisik</b>: Jernih, tidak berbau, tidak berwarna<br>
-7. <b>Logam berat</b>: Timbal, merkuri, arsen (harus sangat rendah)<br><br>
+1. pH (6.5–8.5): Keasaman air<br>
+2. TDS (< 500 ppm): Total zat terlarut<br>
+3. Kekeruhan (< 5 NTU): Kejernihan air<br>
+4. Klorin (< 4 mg/L): Disinfektan residual<br>
+5. Kesadahan (60–300 mg/L): Kandungan mineral kalsium dan magnesium<br>
+6. Kondisi fisik: Jernih, tidak berbau, tidak berwarna<br>
+7. Logam berat: Timbal, merkuri, arsen (harus sangat rendah)<br><br>
 Ketik "apa itu [parameter]" untuk penjelasan detail, contoh: "apa itu pH"`;
+
+   }
 }
 
 // ================= FUNGSI PEMBANTU =================
 
 function generateDefaultResponse() {
-  return `<b>🤖 AIR-AI Enhanced siap membantu!</b><br><br>
-<b>Contoh input multi-parameter</b>:<br>
+  return `🤖 AIR-AI Enhanced siap membantu!<br><br>
+Contoh input multi-parameter:<br>
 • "pH 7.5, TDS 300, air jernih"<br>
 • "TDS=450, pH:6.2, air sedikit keruh"<br>
 • "Kekeruhan 3 NTU, kesadahan 250 mg/L"<br>
 • "pH 8, TDS 600, klorin 1.5"<br><br>
-<b>Untuk edukasi</b>, tanyakan:<br>
+Untuk edukasi, tanyakan:<br>
 • "Apa itu pH?"<br>
 • "Definisi TDS"<br>
 • "Apa yang dimaksud dengan kekeruhan air?"<br><br>
-<b>Parameter yang didukung</b>:<br>
-1. pH (6.5-8.5)<br>
+Parameter yang didukung:<br>
+1. pH (6.5–8.5)<br>
 2. TDS (Total Dissolved Solids)<br>
 3. Kekeruhan (NTU)<br>
 4. Klorin (mg/L)<br>
 5. Kesadahan (mg/L)<br>
 6. Logam berat (timbal, merkuri, arsen, dll)<br>
 7. Kondisi fisik (jernih, keruh, bau, berwarna)`;
+
 }
 
 function generateFinalResponse(statusObj, alasan, solusi, parameterTerdeteksi) {
@@ -589,10 +592,10 @@ function generateFinalResponse(statusObj, alasan, solusi, parameterTerdeteksi) {
   if (parameterTerdeteksi.length >= 3) confidenceLevel = "Tinggi";
   if (parameterTerdeteksi.length === 1) confidenceLevel = "Rendah";
   
-  let response = `<b> ANALISIS KUALITAS AIR</b><br><br>`;
+  let response = `ANALISIS KUALITAS AIR`;
   
   if (parameterTerdeteksi.length > 0) {
-    response += `<b> Parameter Terdeteksi</b>:<br>`;
+    response += `Parameter Terdeteksi`;
     parameterTerdeteksi.forEach(p => response += `• ${escapeHTML(p)}<br>`);
     response += `<br>`;
   }
@@ -732,13 +735,14 @@ if (imageInput && imagePreview && previewImg) {
               : "Air terlalu basa, gunakan filter penurun pH";
           }
 
-          const response = `<b> HASIL ANALISIS FOTO pH</b><br><br>
-• <b>Warna Terdeteksi:</b> ${result.label}<br>
-• <b>Perkiraan pH:</b> ${result.ph}<br>
-• <b>Status:</b> ${status}<br>
-• <b>Solusi:</b> ${solusi}<br>
-• <b>🎯 Tingkat Keyakinan:</b> ${confidence}<br><br>
+          const response = `HASIL ANALISIS FOTO pH<br><br>
+• Warna terdeteksi: ${result.label}<br>
+• Perkiraan pH: ${result.ph}<br>
+• Status: ${status}<br>
+• Solusi: ${solusi}<br>
+• 🎯 Tingkat keyakinan: ${confidence}<br><br>
 <small><i>Catatan: Analisis warna bersifat estimasi visual dan tidak seakurat pH meter.</i></small>`;
+
 
           addBubble(response, "bot");
           saveToHistory(

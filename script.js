@@ -478,7 +478,7 @@ function analyzeHeavyMetals(q, alasan, solusi, statusObj, parameterTerdeteksi) {
 
 function getEducationalContent(q) {
   if (q.includes("ph")) {
-    return `<b>📚 EDUKASI: Apa itu pH Air?</b><br><br>
+    return `<b> EDUKASI: Apa itu pH Air?</b><br><br>
 <b>Definisi</b>: pH adalah ukuran keasaman atau kebasaan air pada skala 0-14.<br>
 • <b>pH < 7</b>: Asam (semakin kecil semakin asam)<br>
 • <b>pH = 7</b>: Netral<br>
@@ -493,7 +493,7 @@ function getEducationalContent(q) {
   }
   
   if (q.includes("tds")) {
-    return `<b>📚 EDUKASI: Apa itu TDS (Total Dissolved Solids)?</b><br><br>
+    return `<b>EDUKASI: Apa itu TDS (Total Dissolved Solids)?</b><br><br>
 <b>Definisi</b>: TDS adalah total zat padat terlarut dalam air, diukur dalam ppm (parts per million).<br><br>
 <b>Komponen TDS</b>:<br>
 - Mineral alami (kalsium, magnesium, natrium)<br>
@@ -589,22 +589,22 @@ function generateFinalResponse(statusObj, alasan, solusi, parameterTerdeteksi) {
   if (parameterTerdeteksi.length >= 3) confidenceLevel = "Tinggi";
   if (parameterTerdeteksi.length === 1) confidenceLevel = "Rendah";
   
-  let response = `<b>🔍 ANALISIS KUALITAS AIR</b><br><br>`;
+  let response = `<b> ANALISIS KUALITAS AIR</b><br><br>`;
   
   if (parameterTerdeteksi.length > 0) {
-    response += `<b>📊 Parameter Terdeteksi</b>:<br>`;
+    response += `<b> Parameter Terdeteksi</b>:<br>`;
     parameterTerdeteksi.forEach(p => response += `• ${escapeHTML(p)}<br>`);
     response += `<br>`;
   }
   
   const icon = status === "Layak" ? "✅" : "❌";
-  response += `<b>📈 Status</b>: ${icon} <b>${status === "Layak" ? "LAYAK" : "TIDAK LAYAK"} KONSUMSI</b><br><br>`;
+  response += `<b>Status</b>: ${icon} <b>${status === "Layak" ? "LAYAK" : "TIDAK LAYAK"} KONSUMSI</b><br><br>`;
   
-  response += `<b>📋 Analisis</b>:<br>`;
+  response += `<b> Analisis</b>:<br>`;
   alasan.forEach(a => response += `• ${escapeHTML(a)}<br>`);
   
   if (solusi.length > 0) {
-    response += `<br><b>💡 Rekomendasi Perbaikan</b>:<br>`;
+    response += `<br><b> Rekomendasi Perbaikan</b>:<br>`;
     solusi.forEach(s => response += `${escapeHTML(s)}<br>`);
   }
   
@@ -616,16 +616,16 @@ function generateFinalResponse(statusObj, alasan, solusi, parameterTerdeteksi) {
   
   // Tambahkan tips berdasarkan status
   if (status === "Tidak Layak") {
-    response += `<br><br><b>⚠️ PERINGATAN</b>: Air ini tidak direkomendasikan untuk dikonsumsi langsung tanpa pengolahan terlebih dahulu.`;
+    response += `<br><br><b> PERINGATAN</b>: Air ini tidak direkomendasikan untuk dikonsumsi langsung tanpa pengolahan terlebih dahulu.`;
   } else {
-    response += `<br><br><b>💡 Tips</b>: Meskipun layak, selalu pastikan air disimpan dalam wadah bersih dan terlindung dari kontaminasi.`;
+    response += `<br><br><b> Tips</b>: Meskipun layak, selalu pastikan air disimpan dalam wadah bersih dan terlindung dari kontaminasi.`;
   }
   
   // Tambahkan saran edukasi
-  response += `<br><br><b>📚 Ingin belajar lebih?</b> Tanyakan "apa itu [parameter]" untuk penjelasan detail.`;
+  response += `<br><br><b> Ingin belajar lebih?</b> Tanyakan "apa itu [parameter]" untuk penjelasan detail.`;
   
   // Disclaimer akademik (NILAI TAMBAH UNTUK LOMBA)
-  response += `<br><br><small><i>🔬 Catatan: Hasil analisis bersifat estimasi berbasis logika AI dan tidak menggantikan uji laboratorium. Konsultasikan dengan ahli untuk diagnosis yang lebih akurat.</i></small>`;
+  response += `<br><br><small><i> Catatan: Hasil analisis bersifat estimasi berbasis logika AI dan tidak menggantikan uji laboratorium. Konsultasikan dengan ahli untuk diagnosis yang lebih akurat.</i></small>`;
   
   return response;
 }
@@ -732,7 +732,7 @@ if (imageInput && imagePreview && previewImg) {
               : "Air terlalu basa, gunakan filter penurun pH";
           }
 
-          const response = `<b>📷 HASIL ANALISIS FOTO pH</b><br><br>
+          const response = `<b> HASIL ANALISIS FOTO pH</b><br><br>
 • <b>Warna Terdeteksi:</b> ${result.label}<br>
 • <b>Perkiraan pH:</b> ${result.ph}<br>
 • <b>Status:</b> ${status}<br>
